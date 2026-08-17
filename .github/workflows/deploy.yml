@@ -23,6 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+        working-directory: .
 
       - name: Build Web
         run: flutter build web --release --base-href "/PEMS_ADVANCE_FLUTTER/"
