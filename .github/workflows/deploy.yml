@@ -10,28 +10,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Java JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Enable Web Support
-        run: flutter create . --platforms web
-
-      - name: Build Web
-        run: flutter build web --release --base-href "/PEMS_ADVANCE_FLUTTER/"
+      - name: Enable Web Platform & Build
+        run: |
+          flutter create . --platforms web
+          flutter build web --release --base-href "/PEMS_ADVANCE_FLUTTER/"
+          touch build/web/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
+          publish_branch: gh-pages
