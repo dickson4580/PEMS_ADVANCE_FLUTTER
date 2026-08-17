@@ -23,7 +23,9 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-        working-directory: .
+
+      - name: Enable Web Support
+        run: flutter create . --platforms web
 
       - name: Build Web
         run: flutter build web --release --base-href "/PEMS_ADVANCE_FLUTTER/"
